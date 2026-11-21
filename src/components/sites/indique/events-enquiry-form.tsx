@@ -47,11 +47,7 @@ const initialState: FormState = {
 };
 
 function fieldClass(hasError: boolean): string {
-  return `w-full rounded-[3px] border bg-transparent px-3 py-3 text-[14px] outline-none ${
-    hasError
-      ? "border-red-700/70 focus:border-red-700"
-      : "border-[var(--ap-ink)]/20 focus:border-[var(--ap-ink)]"
-  }`;
+  return `ap-events-field ${hasError ? "ap-events-field--error" : ""}`;
 }
 
 function isValidPhone(value: string): boolean {
@@ -187,10 +183,8 @@ export function EventsEnquiryForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-[3px] border border-[var(--ap-ink)]/15 bg-[var(--ap-cream)] p-6 md:p-8">
-        <p className="text-[11px] uppercase tracking-[0.16em] text-[var(--ap-gold)]">
-          Enquiry received
-        </p>
+      <div className="ap-events-form ap-events-form--success">
+        <p className="ap-events-form__eyebrow">Enquiry received</p>
         <h3 className="ap-display mt-3 text-[clamp(28px,4vw,40px)]">
           Your enquiry has been received.
         </h3>
@@ -200,7 +194,7 @@ export function EventsEnquiryForm() {
         </p>
         <button
           type="button"
-          className="ap-button ap-button--dark mt-8"
+          className="ap-button ap-button--gold mt-8"
           onClick={() => setStatus("idle")}
         >
           Send another enquiry
@@ -212,15 +206,13 @@ export function EventsEnquiryForm() {
   return (
     <form
       id="event-enquiry"
-      className="relative rounded-[3px] border border-[var(--ap-ink)]/15 bg-[var(--ap-cream)] p-6 md:p-8"
+      className="ap-events-form relative"
       onSubmit={onSubmit}
       noValidate
     >
       <div className="space-y-8">
         <section>
-          <p className="mb-4 text-[11px] uppercase tracking-[0.16em] opacity-60">
-            Personal Details
-          </p>
+          <p className="ap-events-form__section">Personal Details</p>
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block text-[12px] sm:col-span-2">
               <span className="mb-2 block uppercase tracking-[0.12em] opacity-70">
@@ -279,9 +271,7 @@ export function EventsEnquiryForm() {
         </section>
 
         <section>
-          <p className="mb-4 text-[11px] uppercase tracking-[0.16em] opacity-60">
-            Event Details
-          </p>
+          <p className="ap-events-form__section">Event Details</p>
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block text-[12px] sm:col-span-2">
               <span className="mb-2 block uppercase tracking-[0.12em] opacity-70">
@@ -424,9 +414,7 @@ export function EventsEnquiryForm() {
         </section>
 
         <section>
-          <p className="mb-4 text-[11px] uppercase tracking-[0.16em] opacity-60">
-            Additional Information
-          </p>
+          <p className="ap-events-form__section">Additional Information</p>
           <fieldset>
             <legend className="mb-3 text-[12px] uppercase tracking-[0.12em] opacity-70">
               Services Required
@@ -516,7 +504,7 @@ export function EventsEnquiryForm() {
 
       <button
         type="submit"
-        className="ap-button ap-button--dark mt-8 disabled:cursor-wait disabled:opacity-60"
+        className="ap-button ap-button--gold mt-8 disabled:cursor-wait disabled:opacity-60"
         disabled={status === "loading"}
       >
         {status === "loading" ? "Sending…" : "Send Event Enquiry"}
