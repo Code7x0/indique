@@ -2,7 +2,8 @@ export const ASSET = "/sites/indique";
 
 export const brand = {
   name: "INDIQUE",
-  tagline: "ALL OF INDIA. ONE PLATE.",
+  tagline: "ALL OF INDIA. AROUND ONE TABLE.",
+  taglineLines: ["All of India.", "Around One Table."] as const,
   line: "A little bit of everywhere. A whole lot of India.",
   blurb:
     "A contemporary Indian restaurant and bar celebrating the many flavours, traditions and stories of India.",
@@ -14,6 +15,7 @@ export const navLinks = [
   { href: "/", label: "Home" },
   { href: "/menu", label: "Menu" },
   { href: "/about", label: "Our Story" },
+  { href: "/events-catering", label: "Events" },
   { href: "/reservations", label: "Reservations" },
   { href: "/contact", label: "Contact" },
 ] as const;
@@ -22,19 +24,76 @@ export const navLinks = [
 export const primaryNavLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "Our Story" },
+  { href: "/events-catering", label: "Events" },
   { href: "/reservations", label: "Reservations" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
+export const eventTypes = [
+  "Birthday / Celebration",
+  "Anniversary",
+  "Private Dining",
+  "Corporate Event",
+  "Group Gathering",
+  "Catering",
+  "Other",
+] as const;
+
+export const eventLocationTypes = [
+  "At INDIQUE",
+  "At Another Venue",
+  "Location Not Decided Yet",
+] as const;
+
+export const eventServiceOptions = [
+  "Food & Dining",
+  "Catering",
+  "Private Event Arrangement",
+  "Group Dining",
+  "Drinks & Bar Enquiry",
+  "Other",
+] as const;
+
+export const eventBudgetRanges = [
+  "Under ₹25,000",
+  "₹25,000–₹50,000",
+  "₹50,000–₹1,00,000",
+  "₹1,00,000–₹2,00,000",
+  "Above ₹2,00,000",
+  "Not Decided Yet",
+] as const;
+
+export const eventServiceBlocks = [
+  {
+    title: "Private Celebrations",
+    description: "Birthdays, anniversaries and special moments.",
+  },
+  {
+    title: "Corporate & Group Events",
+    description: "Gatherings, team dinners and hosted occasions.",
+  },
+  {
+    title: "Catering Enquiries",
+    description:
+      "Tell us about your event, location and catering requirements.",
+  },
+] as const;
+
 export const location = {
   name: "Indique",
-  address: "[ADD CONFIRMED ADDRESS]",
-  phone: "[ADD CONFIRMED PHONE NUMBER]",
-  phoneHref: "tel:",
+  address: "35 Moonachie Road\nMoonachie, NJ 07074",
+  phone: "+1 609 805 9245",
+  phoneHref: "tel:+16098059245",
+  phones: [
+    { display: "+1 609 805 9245", href: "tel:+16098059245" },
+    { display: "(201) 853 9002", href: "tel:+12018539002" },
+  ],
   email: brand.email,
   emailHref: brand.emailHref,
-  hours: ["[ADD CONFIRMED DAYS AND HOURS]"],
-  directionsUrl: "#directions",
+  hours: [] as string[],
+  directionsUrl: "https://maps.app.goo.gl/hn8cFzA5mJ8bQsUP6?g_st=iw",
+  mapEmbedUrl:
+    "https://maps.google.com/maps?q=35%20Moonachie%20Road%2C%20Moonachie%2C%20NJ%2007074&z=15&output=embed",
 } as const;
 
 export const socials = [

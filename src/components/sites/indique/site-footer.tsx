@@ -17,8 +17,7 @@ function isConfiguredSocial(href: string): boolean {
 
 export function SiteFooter() {
   const address = isConfirmed(location.address) ? location.address : null;
-  const phone = isConfirmed(location.phone) ? location.phone : null;
-  const phoneHref = isConfirmed(location.phoneHref) ? location.phoneHref : null;
+  const phones = location.phones.filter((p) => isConfirmed(p.display));
   const email = isConfirmed(location.email) ? location.email : null;
   const emailHref = isConfirmed(location.emailHref)
     ? location.emailHref
@@ -27,7 +26,7 @@ export function SiteFooter() {
   const activeSocials = socials.filter((s) => isConfiguredSocial(s.href));
   const hasDetails =
     Boolean(address) ||
-    Boolean(phone) ||
+    phones.length > 0 ||
     Boolean(email) ||
     hours.length > 0;
   const hasContact = hasDetails || activeSocials.length > 0;
@@ -51,7 +50,11 @@ export function SiteFooter() {
                 {navLinks.map((link) => (
                   <li key={link.href} data-fade-up>
                     <Link href={link.href} className="ap-footer__link">
-                      <span>{link.label}</span>
+                      <span>
+                        {link.href === "/events-catering"
+                          ? "Events & Catering"
+                          : link.label}
+                      </span>
                       <span className="ap-footer__link-arrow" aria-hidden="true">
                         →
                       </span>
@@ -72,18 +75,15 @@ export function SiteFooter() {
                           {address}
                         </p>
                       ) : null}
-                      {phone ? (
-                        phoneHref ? (
-                          <a
-                            href={phoneHref}
-                            className="ap-footer__contact-text ap-footer__contact-link"
-                          >
-                            {phone}
-                          </a>
-                        ) : (
-                          <p className="ap-footer__contact-text">{phone}</p>
-                        )
-                      ) : null}
+                      {phones.map((p) => (
+                        <a
+                          key={p.href}
+                          href={p.href}
+                          className="ap-footer__contact-text ap-footer__contact-link"
+                        >
+                          {p.display}
+                        </a>
+                      ))}
                       {email && emailHref ? (
                         <a
                           href={emailHref}

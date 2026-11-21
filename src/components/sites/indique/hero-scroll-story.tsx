@@ -358,7 +358,7 @@ export function HeroScrollStory() {
             </p>
 
             <h1 className="ap-h1">All of India.</h1>
-            <h1 className="ap-h1 mt-1">One Plate.</h1>
+            <h1 className="ap-h1 mt-1">Around One Table.</h1>
 
             <p className="ap-body mt-8 max-w-[460px] text-[var(--ap-cream)]">
               From familiar favourites to unexpected discoveries, discover

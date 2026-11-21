@@ -380,6 +380,55 @@ function ExperienceSection() {
   );
 }
 
+function OccasionsSection() {
+  return (
+    <section className="bg-[var(--ap-cream)] text-[var(--ap-ink)]">
+      <div
+        className="mx-auto flex w-full max-w-[820px] flex-col items-center text-center"
+        style={{ padding: "88px var(--ap-pad-x)" }}
+      >
+        <p
+          data-text-split
+          data-letters-fade-in
+          className="ap-caption mb-3 opacity-70"
+        >
+          Make It an Occasion
+        </p>
+        <h2 data-text-split data-letters-fade-in className="ap-h2">
+          Some moments
+          <br />
+          deserve a bigger table.
+        </h2>
+        <p
+          data-fade-up
+          className="ap-body mx-auto mt-5 max-w-[40ch] opacity-85"
+        >
+          From private celebrations to group gatherings and catering enquiries,
+          tell us what you&apos;re planning.
+        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <Link
+            href="/events-catering"
+            data-text-split
+            data-letters-fade-in-hover
+            className="ap-button ap-button--dark"
+          >
+            Explore Events & Catering
+          </Link>
+          <Link
+            href="/events-catering#event-enquiry"
+            data-text-split
+            data-letters-fade-in-hover
+            className="ap-button ap-button--filled"
+          >
+            <span className="ap-button-box">Make an Enquiry</span>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function StoryPreview() {
   return (
     <section
@@ -506,25 +555,40 @@ function LocationSection() {
                 {location.address}
               </p>
             </div>
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.16em] opacity-60">
-                Hours
-              </p>
-              <ul className="mt-2 space-y-1 text-[14px]">
-                {location.hours.map((h) => (
-                  <li key={h}>{h}</li>
-                ))}
-              </ul>
-            </div>
+            {location.hours.length > 0 ? (
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.16em] opacity-60">
+                  Hours
+                </p>
+                <ul className="mt-2 space-y-1 text-[14px]">
+                  {location.hours.map((h) => (
+                    <li key={h}>{h}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
             <div>
               <p className="text-[11px] uppercase tracking-[0.16em] opacity-60">
                 Contact
               </p>
-              <p className="mt-2 text-[14px]">{location.phone}</p>
+              <ul className="mt-2 space-y-1 text-[14px]">
+                {location.phones.map((p) => (
+                  <li key={p.href}>
+                    <a
+                      href={p.href}
+                      className="transition-opacity hover:opacity-70"
+                    >
+                      {p.display}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
           <a
             href={location.directionsUrl}
+            target="_blank"
+            rel="noreferrer"
             data-text-split
             data-letters-fade-in-hover
             className="ap-button ap-button--dark mt-8"
@@ -533,18 +597,14 @@ function LocationSection() {
           </a>
         </div>
         <div className="relative min-h-[360px] overflow-hidden rounded-[3px] bg-[var(--ap-taupe)] lg:min-h-full">
-          <Image
-            src={`${ASSET}/images/story-i.avif`}
-            alt="Visit Indique"
-            fill
-            className="object-cover opacity-90"
-            sizes="(max-width:1024px) 100vw, 50vw"
+          <iframe
+            title="INDIQUE location map"
+            src={location.mapEmbedUrl}
+            className="absolute inset-0 h-full w-full border-0"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
           />
-          <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/50 to-transparent p-6">
-            <p className="text-[13px] text-[var(--ap-cream)] opacity-90">
-              Map placeholder — add confirmed location embed.
-            </p>
-          </div>
         </div>
       </div>
     </section>
@@ -561,6 +621,7 @@ export function HomePage() {
       <TandoorSection />
       <BarSection />
       <ExperienceSection />
+      <OccasionsSection />
       <StoryPreview />
       <ReservationCta />
       <LocationSection />
